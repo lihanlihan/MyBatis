@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>SpringMybatis</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  
+  <!-- 使用ContextLoaderListener初始化spring容器 ,tomcat启动是自动加载-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <!-- 指定ContextLoaderListener监听器加载的多个配置文件 -->
+  <context-param>
+  	<!-- 参数名为contextConfigLocation，这样ContextLoaderListener监听器才会去加载这些xml文件 -->
+  	<param-name>contextConfigLocation</param-name>
+  	
+  	<!-- 配置文件，若是多个配置文件则用“，”隔开 ,可以加载多个xml文件，防止所有的bean都在一个配置文件中看着臃肿，难以维护-->
+  	<param-value>/WEB-INF/applicationContext*.xml</param-value>
+  </context-param>
+  
+  
+  <servlet>
+  	<servlet-name>springmvc</servlet-name>
+  	
+  	<servlet-class>
+  		org.springframework.web.servlet.DispatcherServlet
+  	</servlet-class>
+  	
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>/WEB-INF/springmvc-config.xml</param-value>
+  	</init-param>
+  	<!-- 在web应用启动是立即加载servlet -->
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>springmvc</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+    
+  
+  
+</web-app>
